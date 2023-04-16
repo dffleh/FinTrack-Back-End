@@ -1,6 +1,6 @@
 const queryString = require('query-string');
 
-export const facebookAuth = async (req, res) => {
+async function facebookAuth(req, res) {
   const stringifiedParams = queryString.stringify({
     client_id: process.env.FACEBOOK_APP_ID,
     redirect_uri: `${process.env.BASE_URL}/auth/facebook-redirect/`,
@@ -10,6 +10,10 @@ export const facebookAuth = async (req, res) => {
     display: 'popup',
   });
   return res.redirect(
-    `https://www.facebook.com/v4.0/dialog/oauth?${stringifiedParams}`
+    `https://www.facebook.com/v16.0/dialog/oauth?${stringifiedParams}`
   );
+};
+
+module.exports = {
+  facebookAuth,
 };

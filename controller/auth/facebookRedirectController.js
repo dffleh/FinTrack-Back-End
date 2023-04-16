@@ -4,13 +4,13 @@ const queryString = require('query-string');
 const { Session } = require('../../models/sessionModel');
 const { createToken } = require('../../helpers/createToken');
 
-export const facebookRedirect = async (req, res) => {
+async function facebookRedirect(req, res) {
   const fullUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
   const urlObj = new URL(fullUrl);
   const urlParams = queryString.parse(urlObj.search);
   const code = urlParams.code;
   const tokenData = await axios({
-    url: 'https://graph.facebook.com/v4.0/oauth/access_token',
+    url: 'https://graph.facebook.com/v16.0/oauth/access_token',
     method: 'get',
     params: {
       client_id: process.env.FACEBOOK_APP_ID,
@@ -41,4 +41,8 @@ export const facebookRedirect = async (req, res) => {
   return res.redirect(
     `${process.env.FRONTEND_URL}?accessToken=${accessToken}&refreshToken=${refreshToken}&expiresIn=${expiresIn}`
   );
+};
+
+module.exports = {
+  facebookRedirect,
 };
