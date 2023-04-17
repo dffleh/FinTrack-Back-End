@@ -1,38 +1,32 @@
-const express = require("express");
+const express = require('express');
 
-const { tryCatchWrapper } = require("../helpers/tryCatchWrapper");
-const { authorize } = require("../middlewares/authorize");
+const { tryCatchWrapper } = require('../helpers/tryCatchWrapper');
+const { authorize } = require('../middlewares/authorize');
 
 const {
   deleteTransactionController,
   addTransactionController,
   getTransactionsController,
   getReportController,
-} = require("../controller/transactions");
+} = require('../controller/transactions');
 
 const transactionsRouter = express.Router();
+transactionsRouter.use(authorize());
 
-transactionsRouter.post(
-  "/",
-  tryCatchWrapper(authorize),
-  addTransactionController
-);
+transactionsRouter.post('/', addTransactionController);
 
 transactionsRouter.get(
-  "/:operation",
-  tryCatchWrapper(authorize),
+  '/:operation',
   tryCatchWrapper(getTransactionsController)
 );
 
 transactionsRouter.get(
-  "/report/:operation",
-  tryCatchWrapper(authorize),
+  '/report/:operation',
   tryCatchWrapper(getReportController)
 );
 
 transactionsRouter.delete(
-  "/:transactionId",
-  tryCatchWrapper(authorize),
+  '/:transactionId',
   tryCatchWrapper(deleteTransactionController)
 );
 
