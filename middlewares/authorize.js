@@ -32,7 +32,7 @@ const authorize = () => {
       req.user = user;
       next();
     } catch {
-      throw Unauthorized('Not authorized');
+      next(Unauthorized('Not authorized'));
     }
   };
 };
