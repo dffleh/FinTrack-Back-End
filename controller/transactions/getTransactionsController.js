@@ -14,13 +14,16 @@ const getTransactionsController = async (req, res, next) => {
   )
     return next(BadRequest('Bad request!'));
 
+  const endDate = new Date(end);
+  endDate.setDate(endDate.getDate() + 1);
+
   const transactions =
     operation === 'all'
       ? await Transaction.find({
           owner: _id,
           date: {
             $gte: new Date(start),
-            $lte: new Date(end).setDate(new Date(end).getDate() + 1),
+            $lte: endDate,
           },
         }).sort({ date: -1 })
       : await Transaction.find({
@@ -28,7 +31,7 @@ const getTransactionsController = async (req, res, next) => {
           operation,
           date: {
             $gte: new Date(start),
-            $lte: new Date(end).setDate(new Date(end).getDate() + 1),
+            $lte: endDate,
           },
         }).sort({ date: -1 });
 

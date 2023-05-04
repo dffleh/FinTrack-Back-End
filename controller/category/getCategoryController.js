@@ -14,6 +14,9 @@ const getCategoryContoller = async (req, res, next) => {
   )
     return next(BadRequest('Bad request!'));
 
+  const endDate = new Date(end);
+  endDate.setDate(endDate.getDate() + 1);
+
   const category =
     operation === 'all'
       ? await Transaction.aggregate([
@@ -22,7 +25,7 @@ const getCategoryContoller = async (req, res, next) => {
               owner: _id,
               createdAt: {
                 $gte: new Date(start),
-                $lte: new Date(end),
+                $lte: endDate,
               },
             },
           },
@@ -75,7 +78,7 @@ const getCategoryContoller = async (req, res, next) => {
               owner: _id,
               createdAt: {
                 $gte: new Date(start),
-                $lte: new Date(end),
+                $lte: endDate,
               },
               operation: operation,
             },
