@@ -5,7 +5,7 @@ const getDebtsController = async (req, res, next) => {
   const { _id } = req.user;
   const { start, end } = req.query;
 
-  if (!start || !end) return next(BadRequest('Bad request!'));
+  if (!start || !end) return next(BadRequest('Bad calendar period!'));
 
   const endDate = new Date(end);
   endDate.setDate(endDate.getDate() + 1);
