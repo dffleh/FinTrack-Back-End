@@ -8,7 +8,7 @@ const swaggerDocument = require('./swagger.json');
 const authRouter = require('./routes/authRouter');
 const transactionsRouter = require('./routes/transactionsRouter');
 const userRouter = require('./routes/userRouter');
-const remindersRouter = require('./routes/reminderRouter');
+const debtsRouter = require('./routes/debtRouter');
 const categoryRouter = require('./routes/categoryRouter');
 
 const app = express();
@@ -22,7 +22,7 @@ app.use(express.json());
 app.use('/auth', authRouter);
 app.use('/transactions', transactionsRouter);
 app.use('/users', userRouter);
-app.use('/reminders', remindersRouter);
+app.use('/debts', debtsRouter);
 app.use('/category', categoryRouter);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));

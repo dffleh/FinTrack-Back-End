@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const reminderSchema = Joi.object({
+const debtSchema = Joi.object({
   date: Joi.date().required(),
   payments: Joi.number().required(),
   paymentDate: Joi.date().required(),
@@ -10,5 +10,5 @@ const reminderSchema = Joi.object({
 });
 
 module.exports = {
-  reminderSchema,
+  debtSchema,
 };

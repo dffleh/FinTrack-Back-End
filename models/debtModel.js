@@ -33,6 +33,6 @@ const schema = mongoose.Schema(
   }
 );
 
-const Reminder = mongoose.model('reminder', schema);
+const Debt = mongoose.model('debt', schema);
 
-module.exports = { Reminder };
+module.exports = { Debt };

@@ -6,13 +6,13 @@ const getCategoryContoller = async (req, res, next) => {
   const { operation } = req.params;
   const { start, end } = req.query;
 
-  if (
-    operation !== 'expense' &&
-    operation !== 'income' &&
-    operation !== 'all' &&
-    (!start || !end)
-  )
-    return next(BadRequest('Bad request!'));
+  if (operation !== 'expense' && operation !== 'income' && operation !== 'all')
+    return next(BadRequest('Bad operation!'));
+
+  if (!start || !end) return next(BadRequest('Bad calendar period!'));
+
+  const endDate = new Date(end);
+  endDate.setDate(endDate.getDate() + 1);
 
   const category =
     operation === 'all'
@@ -22,7 +22,7 @@ const getCategoryContoller = async (req, res, next) => {
               owner: _id,
               createdAt: {
                 $gte: new Date(start),
-                $lte: new Date(end),
+                $lte: endDate,
               },
             },
           },
@@ -75,7 +75,7 @@ const getCategoryContoller = async (req, res, next) => {
               owner: _id,
               createdAt: {
                 $gte: new Date(start),
-                $lte: new Date(end),
+                $lte: endDate,
               },
               operation: operation,
             },
