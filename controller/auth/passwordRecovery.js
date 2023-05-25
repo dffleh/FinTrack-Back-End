@@ -13,7 +13,7 @@ const passwordRecovery = async (req, res) => {
 
   const user = await User.findOneAndUpdate(
     { email },
-    { $set: { password: hashedPassword } }
+    { $set: { password: hashedPassword, isTemporaryPassword: true } }
   );
   if (!user) throw Unauthorized('User not found!');
 
