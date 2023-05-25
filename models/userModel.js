@@ -25,6 +25,36 @@ const schema = mongoose.Schema(
       type: Number,
       default: 0,
     },
+    isTemporaryPassword: {
+      type: Boolean,
+      default: false,
+    },
+    settings: {
+      language: {
+        type: String,
+        default: null,
+      },
+      currency: {
+        type: String,
+        default: null,
+      },
+      pushNotification: {
+        type: Boolean,
+        default: true,
+      },
+      emailNotification: {
+        type: Boolean,
+        default: true,
+      },
+      sound: {
+        type: Boolean,
+        default: false,
+      },
+      vibrate: {
+        type: Boolean,
+        default: false,
+      },
+    },
   },
   {
     versionKey: false,
