@@ -8,12 +8,18 @@ const {
   addTransactionController,
   getTransactionsController,
   getReportController,
+  changeTransactionController,
 } = require('../controller/transactions');
 
 const transactionsRouter = express.Router();
 transactionsRouter.use(authorize());
 
-transactionsRouter.post('/', addTransactionController);
+transactionsRouter.post('/', tryCatchWrapper(addTransactionController));
+
+transactionsRouter.put(
+  '/:transactionId',
+  tryCatchWrapper(changeTransactionController)
+);
 
 transactionsRouter.get(
   '/:operation',

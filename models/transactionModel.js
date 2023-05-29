@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const { transactionSchema } = require("../schemas/transaction");
+const { transactionSchema } = require('../schemas/transaction');
 
 const schema = mongoose.Schema(
   {
@@ -16,18 +16,31 @@ const schema = mongoose.Schema(
       type: String,
       required: true,
     },
+    place: {
+      type: String,
+      required: true,
+    },
+    icon: {
+      type: String,
+      required: true,
+    },
     sum: {
       type: Number,
       required: true,
     },
     operation: {
       type: String,
-      enum: ["income", "expense"],
+      enum: ['income', 'expense'],
       required: true,
     },
     owner: {
       type: mongoose.ObjectId,
-      ref: "user",
+      ref: 'user',
+      required: true,
+    },
+    wallet: {
+      type: mongoose.ObjectId,
+      ref: 'wallet',
       required: true,
     },
   },
@@ -37,7 +50,7 @@ const schema = mongoose.Schema(
   }
 );
 
-const Transaction = mongoose.model("transaction", schema);
+const Transaction = mongoose.model('transaction', schema);
 
 const schemas = { transactionSchema };
 
