@@ -24,7 +24,7 @@ walletsRouter.post(
 );
 
 walletsRouter.get('/', tryCatchWrapper(getWalletsController));
-
+// edit wallet
 walletsRouter.put(
   '/:walletId',
   validateBody(walletSchema),
