@@ -11,6 +11,7 @@ const userRouter = require('./routes/userRouter');
 const debtsRouter = require('./routes/debtRouter');
 const categoryRouter = require('./routes/categoryRouter');
 const remaindersRoute = require('./routes/remaindersRoute');
+const walletsRouter = require('./routes/walletsRouter');
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use('/users', userRouter);
 app.use('/debts', debtsRouter);
 app.use('/category', categoryRouter);
 app.use('/remainders', remaindersRoute);
+app.use('/wallets', walletsRouter);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

@@ -1,5 +1,5 @@
-const { User } = require("../../models/userModel");
-const { NotFound } = require("http-errors");
+const { User } = require('../../models/userModel');
+const { NotFound } = require('http-errors');
 
 const updateBalance = async (req, res, next) => {
   try {
@@ -8,7 +8,7 @@ const updateBalance = async (req, res, next) => {
       new: true,
     });
     if (!result) {
-        NotFound("User not found");
+      NotFound('User not found');
     }
     res.status(200).json({
       email: result.email,
