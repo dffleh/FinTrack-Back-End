@@ -1,6 +1,7 @@
-const { BadRequest } = require('http-errors');
+const addRemainder = require('../../service/remaidersServices/addRemainder');
 
 const addRemaindersController = async (req, res, next) => {
-  res.status(201).console.log('kjnbjh');
+  const newRemainder = await addRemainder(req.body);
+  res.status(201).json(newRemainder);
 };
 module.exports = { addRemaindersController };

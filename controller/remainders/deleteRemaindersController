@@ -1,0 +1,11 @@
+const deleteRemainder = require('../../service/remaidersServices/deleteRemainder');
+
+const deleteRemaindersController = async (req, res, next) => {
+  const { contactId } = req.params;
+  const { _id } = req.user;
+  const remainder = await deleteRemainder(_id);
+  if (!remainder) return next();
+  res.status(204).json({ message: `Remainder is deleted` });
+};
+
+module.exports = deleteRemaindersController;
