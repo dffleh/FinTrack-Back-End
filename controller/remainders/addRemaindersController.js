@@ -1,7 +1,30 @@
-const addRemainder = require('../../service/remaidersServices/addRemainder');
+const httpError = require('../../helpers/httpError');
+const { Remainder } = require('../../models/remainderModel');
 
-const addRemaindersController = async (req, res, next) => {
-  const newRemainder = await addRemainder(req.body);
+async function addRemaindersController(req, res, next) {
+  const {
+    category,
+    deskription,
+    phone,
+    amount,
+    sum,
+    dateOfPayment,
+    regularPayment,
+    owner,
+  } = req.body;
+  const newRemainder = await Remainder.create({
+    category,
+    deskription,
+    phone,
+    amount,
+    sum,
+    dateOfPayment,
+    regularPayment,
+    owner,
+  });
+  if (!newRemainder) {
+    return next(httpError, 'Movie not found');
+  }
   res.status(201).json(newRemainder);
-};
+}
 module.exports = { addRemaindersController };

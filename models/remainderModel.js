@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const remainderSchema = new mongoose.Schema(
+const remainderSchema = mongoose.Schema(
   {
     category: {
       type: String,
@@ -28,11 +28,11 @@ const remainderSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    owner: {
-      type: mongoose.ObjectId,
-      ref: 'user',
-      required: true,
-    },
+    // owner: {
+    //   type: mongoose.ObjectId,
+    //   ref: 'user',
+    //   required: true,
+    // },
   },
   {
     versionKey: false,
@@ -42,16 +42,16 @@ const remainderSchema = new mongoose.Schema(
 
 const Remainder = mongoose.model('Remainder', remainderSchema);
 
-module.exports = Remainder;
-
+module.exports = { Remainder };
 // const saved = await Remainder.create({
-//   category: 'jhvgj21g',
+//   category: 'dfdghjhxxxxxx',
 //   deskription: 'b21jhkhkhb',
 //   phone: '211212',
 //   amount: false,
 //   sum: '12233',
 //   dateOfPayment: '22.03.02',
 //   regularPayment: false,
+//   owner: '123dfdfgfa',
 // });
-// const remainder = await Remainder.find();
+// const remainder = await Remainder.findById('647c6a26ec43a64008c3525f');
 // console.log(remainder);

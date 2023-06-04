@@ -1,6 +1,11 @@
-const addRemaindersController = require('./deleteDebtController');
-const deleteRemaindersController = require('./deleteDebtController');
+const { addRemaindersController } = require('./addRemaindersController');
+const { getRemaindersController } = require('./getRemaindersController');
+const { deleteRemaindersController } = require('./deleteRemaindersController');
+const { getOneRemainderController } = require('./getOneRemainderController');
+
 module.exports = {
   addRemaindersController,
   deleteRemaindersController,
+  getRemaindersController,
+  getOneRemainderController,
 };
