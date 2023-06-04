@@ -23,7 +23,7 @@ async function addRemaindersController(req, res, next) {
     owner,
   });
   if (!newRemainder) {
-    return next(httpError, 'Movie not found');
+    return next(httpError, 'Remainders not found');
   }
   res.status(201).json(newRemainder);
 }

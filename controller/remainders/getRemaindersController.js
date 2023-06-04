@@ -1,10 +1,11 @@
 const httpError = require('../../helpers/httpError');
 const { Remainder } = require('../../models/remainderModel');
 
-async function getRemaindersController(req, res, next) {
-  const remainders = await Remainder.find({});
+async function getRemaindersController(req, res) {
+  const { limit } = req.query;
+  const remainders = await Remainder.find({}).limit(limit);
   if (!remainders) {
-    return next(httpError, 'Movie not found');
+    return httpError;
   }
   res.json(remainders);
 }

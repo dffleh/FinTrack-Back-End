@@ -1,4 +1,4 @@
-const { httpError } = require('../../helpers/httpError');
+const httpError = require('../../helpers/httpError');
 
 const { Remainder } = require('../../models/remainderModel');
 
@@ -6,7 +6,7 @@ async function deleteRemaindersController(req, res, next) {
   const { id } = req.params;
   const remainder = await Remainder.findById(id);
   if (!remainder) {
-    return next(httpError, 'No movie');
+    return next(httpError, 'No Remainder found');
   }
   await Remainder.findByIdAndRemove(id);
   return res.status(200).json(remainder);
