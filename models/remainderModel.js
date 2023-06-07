@@ -9,9 +9,7 @@ const remainderSchema = mongoose.Schema(
     deskription: {
       type: String,
     },
-    phone: {
-      type: String,
-    },
+
     amount: {
       type: Boolean,
       default: false,
@@ -22,17 +20,17 @@ const remainderSchema = mongoose.Schema(
     },
     dateOfPayment: {
       type: String,
-      required: true,
+      required: [true, 'Set date of payment'],
     },
     regularPayment: {
       type: Boolean,
       default: false,
     },
-    // owner: {
-    //   type: mongoose.ObjectId,
-    //   ref: 'user',
-    //   required: true,
-    // },
+    owner: {
+      type: mongoose.ObjectId,
+      ref: 'user',
+      required: true,
+    },
   },
   {
     versionKey: false,
@@ -43,15 +41,3 @@ const remainderSchema = mongoose.Schema(
 const Remainder = mongoose.model('Remainder', remainderSchema);
 
 module.exports = { Remainder };
-// const saved = await Remainder.create({
-//   category: 'dfdghjhxxxxxx',
-//   deskription: 'b21jhkhkhb',
-//   phone: '211212',
-//   amount: false,
-//   sum: '12233',
-//   dateOfPayment: '22.03.02',
-//   regularPayment: false,
-//   owner: '123dfdfgfa',
-// });
-// const remainder = await Remainder.findById('647c6a26ec43a64008c3525f');
-// console.log(remainder);

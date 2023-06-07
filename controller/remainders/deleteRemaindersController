@@ -1,5 +1,4 @@
 const httpError = require('../../helpers/httpError');
-
 const { Remainder } = require('../../models/remainderModel');
 
 async function deleteRemaindersController(req, res, next) {
