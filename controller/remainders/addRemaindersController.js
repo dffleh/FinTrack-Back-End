@@ -5,7 +5,7 @@ async function addRemaindersController(req, res, next) {
   const {
     category,
     deskription,
-    phone,
+
     amount,
     sum,
     dateOfPayment,
@@ -15,7 +15,7 @@ async function addRemaindersController(req, res, next) {
   const newRemainder = await Remainder.create({
     category,
     deskription,
-    phone,
+
     amount,
     sum,
     dateOfPayment,
