@@ -1,26 +1,26 @@
 const { Remainder } = require('../../models/remainderModel');
+const { BadRequest } = require('http-errors');
 
 async function sortRemindersController(req, res, next) {
-  const { startDate, endDate } = req.body;
+  const { startDate, endDate } = req.query;
 
-  const { _id } = req.user;
-  console.log('startDate:', startDate);
-  console.log('endDate:', endDate);
+  if (!startDate || !endDate) return next(BadRequest('Bad calendar period!'));
+
   try {
     const reminders = await Remainder.find({
-      owner: _id,
+      // owner: req.user._id,
       dateOfPayment: {
-        $gte: startDate,
+        $gte: new Date(startDate),
         $lte: endDate,
       },
-    });
+    }).sort({ dateOfPayment: 1 });
 
     if (reminders.length === 0) {
       return res.status(404).json({ message: 'Reminders not found' });
     }
-    console.log('Reminders found:', reminders);
     res.status(200).json(reminders);
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: 'Internal server error' });
   }
 }

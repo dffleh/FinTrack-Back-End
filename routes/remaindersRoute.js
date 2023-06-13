@@ -13,8 +13,8 @@ const {
 const remaindersRoute = express.Router();
 
 remaindersRoute.get('/', tryCatchWrapper(getRemaindersController));
+remaindersRoute.get('/sort', sortRemindersController);
 remaindersRoute.get('/:id', tryCatchWrapper(getOneRemainderController));
-remaindersRoute.get('/sort', tryCatchWrapper(sortRemindersController));
 
 remaindersRoute.delete('/:id', tryCatchWrapper(deleteRemaindersController));
 remaindersRoute.post('/', tryCatchWrapper(addRemaindersController));

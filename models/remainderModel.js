@@ -19,7 +19,7 @@ const remainderSchema = mongoose.Schema(
       required: [true, 'Set sum'],
     },
     dateOfPayment: {
-      type: String,
+      type: Date,
       required: [true, 'Set date of payment'],
     },
     regularPayment: {
