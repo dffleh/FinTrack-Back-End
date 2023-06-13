@@ -19,7 +19,7 @@ const authRouter = express.Router();
 
 authRouter.post('/register', tryCatchWrapper(register));
 authRouter.post('/login', tryCatchWrapper(login));
-authRouter.post('/logout', tryCatchWrapper(authorize), tryCatchWrapper(logout));
+authRouter.post('/logout', authorize(), tryCatchWrapper(logout));
 authRouter.get('/google', tryCatchWrapper(googleAuth));
 authRouter.get('/google-redirect', tryCatchWrapper(googleRedirect));
 authRouter.get('/facebook', tryCatchWrapper(facebookAuth));
@@ -28,7 +28,7 @@ authRouter.post('/refresh', tryCatchWrapper(refreshToken));
 authRouter.post('/password/recovery', tryCatchWrapper(passwordRecovery));
 authRouter.post(
   '/password/change',
-  tryCatchWrapper(authorize),
+  authorize(),
   tryCatchWrapper(passwordChange)
 );
 
