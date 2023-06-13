@@ -8,7 +8,7 @@ async function sortRemindersController(req, res, next) {
 
   try {
     const reminders = await Remainder.find({
-      // owner: req.user._id,
+      owner: req.user._id,
       dateOfPayment: {
         $gte: new Date(startDate),
         $lte: endDate,
