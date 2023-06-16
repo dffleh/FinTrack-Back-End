@@ -1,12 +1,24 @@
+const { isValidObjectId } = require('mongoose');
 const httpError = require('../../helpers/httpError');
 const { Remainder } = require('../../models/remainderModel');
 
 async function getOneRemainderController(req, res, next) {
   const { id } = req.params;
-  const remainder = await Remainder.findById(id);
-  if (!remainder) {
-    return next(httpError, 'Remainder not found');
+
+  if (!isValidObjectId(id)) {
+    return next(httpError(400, 'Invalid ID'));
   }
-  return res.json(remainder);
+
+  try {
+    const remainder = await Remainder.findById(id);
+    if (!remainder) {
+      return next(httpError(404, 'Remainder not found'));
+    }
+
+    return res.json(remainder);
+  } catch (error) {
+    return next(httpError(500, 'Internal server error'));
+  }
 }
+
 module.exports = { getOneRemainderController };

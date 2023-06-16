@@ -1,3 +1,4 @@
+const httpError = require('../../helpers/httpError');
 const { Remainder } = require('../../models/remainderModel');
 const { BadRequest } = require('http-errors');
 
@@ -8,7 +9,7 @@ async function sortRemindersController(req, res, next) {
 
   try {
     const reminders = await Remainder.find({
-      // owner: req.user._id,
+      owner: req.user._id,
       dateOfPayment: {
         $gte: new Date(startDate),
         $lte: endDate,
@@ -16,12 +17,11 @@ async function sortRemindersController(req, res, next) {
     }).sort({ dateOfPayment: 1 });
 
     if (reminders.length === 0) {
-      return res.status(404).json({ message: 'Reminders not found' });
+      return next(httpError(404, 'Reminders not found'));
     }
     res.status(200).json(reminders);
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: 'Internal server error' });
+    return next(httpError(500, 'Internal server error'));
   }
 }
 
