@@ -26,11 +26,11 @@ const remainderSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    // owner: {
-    //   type: mongoose.ObjectId,
-    //   ref: 'user',
-    //   required: true,
-    // },
+    owner: {
+      type: mongoose.ObjectId,
+      ref: 'user',
+      required: true,
+    },
   },
   {
     versionKey: false,
