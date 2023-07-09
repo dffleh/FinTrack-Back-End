@@ -12,13 +12,13 @@ const authorize = () => {
     const { authorization = '' } = req.headers;
     const [bearer, token] = authorization.split(' ');
     const isBlackToken = await Token.findOne({ token });
-
-    if (isBlackToken) throw Unauthorized('Token is not valid!!!');
-
-    if (bearer !== 'Bearer') {
-      throw Unauthorized('Not authorized');
-    }
     try {
+      if (isBlackToken) throw Unauthorized('Token is not valid!!!');
+
+      if (bearer !== 'Bearer') {
+        throw Unauthorized('Not authorized');
+      }
+
       const { uid, sid } = jwt.verify(token, JWT_ACCESS_SECRET);
 
       const user = await User.findById(uid);
