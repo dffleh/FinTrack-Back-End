@@ -12,8 +12,10 @@ const {
   facebookAuth,
   facebookRedirect,
 } = require('../controller/auth');
-const { passwordRecovery } = require('../controller/auth/passwordRecovery');
+const { sendRecoveryCode } = require('../controller/auth/sendRecoveryCode');
+const { codeVerification } = require('../controller/auth/codeVerification');
 const { passwordChange } = require('../controller/auth/passwordChange');
+const { passwordRecovery } = require('../controller/auth/passwopdRecovery');
 
 const authRouter = express.Router();
 
@@ -25,7 +27,17 @@ authRouter.get('/google-redirect', tryCatchWrapper(googleRedirect));
 authRouter.get('/facebook', tryCatchWrapper(facebookAuth));
 authRouter.get('/facebook-redirect', tryCatchWrapper(facebookRedirect));
 authRouter.post('/refresh', tryCatchWrapper(refreshToken));
-authRouter.post('/password/recovery', tryCatchWrapper(passwordRecovery));
+authRouter.post('/password/sendCode', tryCatchWrapper(sendRecoveryCode));
+authRouter.post(
+  '/password/codeVerification',
+  tryCatchWrapper(codeVerification)
+);
+authRouter.patch(
+  '/password/recovery',
+  authorize(),
+  tryCatchWrapper(passwordRecovery)
+);
+
 authRouter.post(
   '/password/change',
   authorize(),

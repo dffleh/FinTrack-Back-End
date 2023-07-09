@@ -25,7 +25,11 @@ const schema = mongoose.Schema(
       type: Number,
       default: 0,
     },
-    isTemporaryPassword: {
+    secureCode: {
+      type: Number,
+      default: null,
+    },
+    isPasswordRecovery: {
       type: Boolean,
       default: false,
     },
